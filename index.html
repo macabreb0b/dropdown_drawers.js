@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src='./jquery-1.11.1.js'></script>
+    <script src='./metric_box.js'></script>
+    <link rel='stylesheet' href='metric_box.css'>
+    
+    <style>
+      .centerme {
+        width: 100%;
+        height: 200px;
+        position:absolute;
+        bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='centerme'>
+      <div class='metric' id='currentRatio'></div>
+    </div>
+    
+    <script>
+      var metric = {
+        'name': 'current ratio',
+        'percentiles': [
+          {
+            'name': '25%',
+            'selected': false
+          },
+          {
+            'name': '50%',
+            'selected': false
+          },
+          {
+            'name': '75%',
+            'selected': false
+          },
+          {
+            'name': '100%',
+            'selected': true
+          }
+        ]
+      };
+      
+      $(function() {
+        $(currentRatio).metricBox(metric);
+      });
+    </script>
+  </body>
+</html>
