@@ -1,7 +1,7 @@
 $.MetricBox = function(el, metric) {
     this.$el = $(el);
     
-    this.$nameBlock = $('<div class="name-block">');
+    this.$nameBlock = $('<div class="name-block align-children-middle">');
     this.$el.append(this.$nameBlock);
     
     this.$drawer = $('<div class="drawer">');
@@ -97,7 +97,7 @@ $.MetricBox.prototype.deselectPercentile = function(percentile, $percentile) {
 };
 
 $.MetricBox.prototype.buildPercentile = function(percentile, idx) {
-    var $percentile = $('<div class="percentile">');
+    var $percentile = $('<div class="percentile align-children-middle">');
     $percentile.data('ord', idx);
     
     if (percentile['selected']) $percentile.addClass('selected');
