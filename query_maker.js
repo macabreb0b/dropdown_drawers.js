@@ -20,7 +20,7 @@
         
         this.$el.on('activateMetric', this.activateMetric.bind(this));
         this.$el.on('deactivateMetric', this.deactivateMetric.bind(this));
-        this.$makeQuery.on('click', this.makeRequest.bind(this));
+ //TODO: Disabled on-click firing.       // this.$makeQuery.on('click', this.makeRequest.bind(this));
         
         this.getDefaultMetrics();
         this.drawStartingQuery();
