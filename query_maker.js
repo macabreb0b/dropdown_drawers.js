@@ -13,15 +13,19 @@
         this.$el = $el;
         this.$activeMetrics = this.$el.find('.active-metrics');
         this.$inactiveMetrics = this.$el.find('.inactive-metrics');
+        this.$bizList = this.$el.find('.biz-list');
+        this.$makeQuery = this.$el.find('.make-query');
+        
         this.metrics = {};
         
         this.$el.on('activateMetric', this.activateMetric.bind(this));
         this.$el.on('deactivateMetric', this.deactivateMetric.bind(this));
+        this.$makeQuery.on('click', this.makeRequest.bind(this));
         
         this.getDefaultMetrics();
         this.drawStartingQuery();
     };
-    
+
     QueryMaker.prototype.getDefaultMetrics = function() {
         Report.BASIC_METRICS.forEach(function(metric) {
             this.metrics[metric] = Report.METRICS[metric];
@@ -48,9 +52,75 @@
         this.metrics[key].active = false;
     };
     
-    QueryMaker.prototype.buildQueryFromActiveMetrics = function() {};
+    QueryMaker.prototype.buildParamsFromActiveMetrics = function() {
+        var activeParams = [];
+        for(var metricKey in this.metrics) {
+            var metric = this.metrics[metricKey];
+            if (metric.active) {
+                metricKey = 'stock.' + metricKey + metric.type;
+                var selectedBucket = null;
+                metric.buckets.forEach(function(bucket) {
+                    if (bucket.selected) {
+                        selectedBucket = bucket;
+                    }                    
+                });
+
+                if (selectedBucket) {
+                    var param = {range: {}};
+                    param.range[metricKey] = range = {};
+                    range[selectedBucket.operand] = selectedBucket.value;
+                
+                    activeParams.push(param);                    
+                }
+            }
+        }
+        
+        return activeParams;
+    };
     
-    QueryMaker.prototype.makeRequest = function() {};
+    QueryMaker.prototype.makeRequest = function() {
+        var url = 'http://www.myisquared.com:9200/stockpicks/_search';
+        var musts = this.buildParamsFromActiveMetrics();
+        var data = {
+            query: {
+                bool: {
+                    must: musts,
+                    must_not:[],
+                    should:[],
+                }
+            },
+            from: 0,
+            size: 10,
+            sort: [],
+            facets: {}
+        };
+        
+        var view = this;
+        var response = $.ajax({
+            type: 'GET',
+            url: url, 
+            data: JSON.stringify(data),
+            success: function(resp) {
+                var hits = resp.hits.hits;
+                view.$bizList.html('');
+                hits.forEach(function(hit) {
+                    var $li = view.renderCompanyListItem(hit._source)
+                    view.$bizList.append($li);                    
+                })
+            }
+        })
+    };
+    
+    QueryMaker.prototype.renderCompanyListItem = function(company) {
+        var li = [
+            '<li class="company">',
+            '<h3>' + company.name + ' : ' + company.symbol + '</h3>',
+            '<span>sector: ' + company.sector + '</span><br>',
+            '<span>industry: ' + company.industry + '</span>',
+            '</li>'
+        ];
+        return $(li.join(''));
+    };
     
     Report.BASIC_METRICS = [
         "total_current_assets",
@@ -69,96 +139,94 @@
     Report.METRICS = {
         "total_current_assets": {
             name: 'total current assets',
+            type: '_percentile',
             buckets: [
                 {
                     name: '20%',
+                    operand: 'gt',
+                    value: 20,
                     selected: false,
                     tooltip: ''
                 },
                 {
                     name: '40%',
+                    operand: 'gt',
+                    value: 40,
                     selected: false,
                     tooltip: ''
                 },
                 {
                     name: '60%',
+                    operand: 'gt',
+                    value: 60,
                     selected: false,
                     tooltip: ''
                 },
                 {
                     name: '80%',
+                    operand: 'gt',
+                    value: 80,
                     selected: false,
                     tooltip: ''
-                },
-                {
-                    name: '100%',
-                    selected: false,
-                    tooltip: ''
-                },
+                }
             ],
-            active: false,
+            active: true,
             tooltip: '',
         },
         "total_current_liabilities": {
             name: 'total current liabilities',
+            type: '_percentile',
             buckets: [
                 {
                     name: '20%',
+                    operand: 'gt',
+                    value: 20,
                     selected: false,
                     tooltip: ''
                 },
                 {
                     name: '40%',
+                    operand: 'gt',
+                    value: 40,
                     selected: false,
                     tooltip: ''
                 },
                 {
                     name: '60%',
+                    operand: 'gt',
+                    value: 60,
                     selected: false,
                     tooltip: ''
                 },
                 {
                     name: '80%',
+                    operand: 'gt',
+                    value: 80,
                     selected: false,
                     tooltip: ''
-                },
-                {
-                    name: '100%',
-                    selected: false,
-                    tooltip: ''
-                },
+                }
             ],
             active: true,
             tooltip: '',
         },
         "current_ratio": {
             name: 'current ratio',
+            type: '',
             buckets: [
                 {
-                    name: '20%',
+                    name: '<1',
+                    operand: 'lt',
+                    value: '1',
                     selected: false,
                     tooltip: ''
                 },
                 {
-                    name: '40%',
+                    name: '>1',
+                    operand: 'gt',
+                    value: '1',
                     selected: false,
                     tooltip: ''
-                },
-                {
-                    name: '60%',
-                    selected: false,
-                    tooltip: ''
-                },
-                {
-                    name: '80%',
-                    selected: false,
-                    tooltip: ''
-                },
-                {
-                    name: '100%',
-                    selected: false,
-                    tooltip: ''
-                },
+                }
             ],
             active: true,
             tooltip: '',

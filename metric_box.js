@@ -26,10 +26,6 @@ $.MetricBox = function(el, metric, query) {
     }
 };
 
-$.MetricBox.bucketColors = [
-    
-];
-
 $.MetricBox.prototype.activate = function() {
     this.stopInactiveListeners();
     this.startActiveListeners();
@@ -40,6 +36,7 @@ $.MetricBox.prototype.activate = function() {
 $.MetricBox.prototype.deactivate = function() {
     this.stopActiveListeners();
     this.startInactiveListeners();
+    this.slideDown();
     this.query.$el.trigger('deactivateMetric', this);
     return false;
 };
@@ -124,24 +121,32 @@ $.MetricBox.prototype.buildPercentiles = function() {
 $.MetricBox.prototype.toggleSelection = function(event) {
     var $target = $(event.currentTarget);
     var ord = $target.data('ord');
-    var bucket = this.metric['buckets'][ord];
+    var bucket = this.metric.buckets[ord];
 
-    if (bucket.selected) {
-        this.deselectPercentile(bucket, $target);
-    } else {
-        this.selectPercentile(bucket, $target);
+    this.selectPercentile(ord, $target);
+
+};
+
+$.MetricBox.prototype.selectPercentile = function(ord, $bucket) {
+    $bucket.siblings().removeClass('selected');
+    
+    while($bucket[0]) {
+        $bucket.addClass('selected');
+        $bucket = $bucket.next();
     }
+    this.metric.buckets.forEach(function(bucket) {
+        bucket.selected = false;
+    })
+    this.metric.buckets[ord].selected = true;
 };
-
-$.MetricBox.prototype.selectPercentile = function(bucket, $bucket) {
-    $bucket.addClass('selected');
-    bucket.selected = true;
-};
-
-$.MetricBox.prototype.deselectPercentile = function(bucket, $bucket) {
-    $bucket.removeClass('selected');
-    bucket.selected = false;
-};
+//
+// $.MetricBox.prototype.deselectPercentile = function(ord, $bucket) {
+//     while($bucket[0]) {
+//         $bucket.removeClass('selected');
+//         $bucket = $bucket.prev();
+//     }
+//     this.metric.buckets[ord] = false;
+// };
 
 $.MetricBox.prototype.buildPercentile = function(bucket, idx) {
     var $bucket = $('<div class="bucket align-children-middle">');

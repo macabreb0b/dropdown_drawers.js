@@ -19,18 +19,37 @@
         position:absolute;
         top:0;right:0;left:0;
         bottom:70%;
-        background-color: rgb(14, 116, 175);
+        background-color: rgb(131,134,137);
+        z-index: 1;
       }
       
       .inactive-metrics .metric {
-        filter: grayscale(100%);
-        -webkit-filter: grayscale(100%);
-        -webkit-transform: scale(.75);
-        transform: scale(.75);
+        width: 120px;
+        height: 40px;
+        margin: 10px;
+        margin-top: 30px;
+      }
+      .inactive-metrics .metric .name-block {
+        width: 100%;
+        background: lightgrey;
+        font-size: .9em;
+      }
+      .inactive-metrics .metric .handle {
+        background: lightgrey;
+      }
+      .inactive-metrics .metric .deactivate-block {
+        display: none;
       }
       
-      .inactive-metrics .metric .deactivate-metric {
-        visibility: hidden;
+      .biz-list {
+        position:fixed;
+        top:0;
+        bottom:0;
+        right: 0;
+        left:0;
+        background: rgb(235, 227,170);
+        border-left: thin solid black;
+        overflow: auto;
       }
       
       .deactivate-metric {
@@ -43,17 +62,46 @@
         line-height: 26px;
       }
       
+      .make-query {
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        font-size: 35px;
+        line-height: 50px;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        right: 0;
+        z-index: 3;
+        background:purple;
+      }
+      
       .active-metrics {
         position:absolute;
         top:30%;
-        left:0;right:0;bottom:0;
+        left:0;right:0;
+        bottom:50px;
         overflow-x: scroll;
         display: flex;
-        background-color: #e2e4e6;
+        background-color: rgb(255,255,255);
+        z-index: 1;
       }
-      
       .active-metrics .metric {
         align-self: flex-end;
+      }
+      .col-left, .col-right {
+        position:absolute;
+        top:0;bottom:0;
+      }
+      .col-left {
+        left: 0;
+        right: 50%;
+      }
+      .col-right {
+        left: 50%;
+        right:0;
       }
     </style>
   </head>
@@ -61,14 +109,22 @@
     
     <div class='backdrop'>
       <div id='mainContent'>
-        <div class='inactive-metrics'></div>
-        <div class='active-metrics align-children-bottom'></div>
+        <div class='col-left'>
+          <div class='inactive-metrics'></div>
+          <div class='active-metrics align-children-bottom'></div>
+          <div class='make-query'>?</div>
+        </div>
+        
+        <div class='col-right'>
+          
+          <div class='biz-list'></div>
+        </div>
       </div>
     </div>
     
     <script>
       $(function() {
-        new app.QueryMaker($(mainContent));
+        q = new app.QueryMaker($(mainContent));
       });
     </script>
   </body>

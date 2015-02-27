@@ -34,13 +34,14 @@ html {
 
 .metric .main-block {
   z-index: 2;
-  background: rgb(157, 216, 112);
+  background: rgb(168,202,186);
   border: thin solid slategrey;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   
   position: absolute;
   top:0;left:0;bottom:0;right:0;
+  overflow: hidden;
 }
 
 .metric .bucket {
@@ -128,7 +129,7 @@ html {
   width: 100%;
   position: relative;
   height: 21px;
-  background: rgb(157, 216, 112);
+  background: rgb(168,202,186);
   border: thin solid slategrey;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
