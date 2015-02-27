@@ -27,11 +27,12 @@ html {
   display: inline-block;
   vertical-align:bottom;
 }
+
 .metric:first-child {
   margin-left: 20px;
 }
 
-.metric .name-block {
+.metric .main-block {
   z-index: 2;
   background: rgb(157, 216, 112);
   border: thin solid slategrey;
@@ -42,42 +43,58 @@ html {
   top:0;left:0;bottom:0;right:0;
 }
 
-.metric .percentile {
+.metric .bucket {
   height: 50px;
   width: 150px;
   font-size: .9em;
 }
 
 .metric .name-block,
-.metric .percentile,
-.metric .handle {
+.metric .bucket,
+.metric .handle, 
+.metric .deactivate-block {
   cursor: pointer;
 }
 
 .metric .name-block,
-.metric .percentile {
-  vertical-align: middle;
+.metric .bucket,
+.metric .deactivate-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: white;
   font-style: bold;
 }
 
-.metric .percentile:first-child {
+.metric .name-block {
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+
+.metric .deactivate-block {
+    width: 20%;
+    height: 100%;
+    float: left;
+    border-left: thin solid slategrey;
+}
+
+.metric .bucket:first-child {
   border-top: 0;
 }
 
-.metric .percentile {
+.metric .bucket {
   border-left: thin solid slategrey;
   border-top: thin solid slategrey;
   border-right: thin solid slategrey;
 }
 
-.align-children-middle > *,
+/*.align-children-middle > *,
 .align-children-bottom > * {
   display: inline-block;
 }
 
-/* vertically center the text wiht an invisible pseudo element */
 .align-children-middle::before,
 .align-children-bottom::before {
   height: 100%;
@@ -91,7 +108,7 @@ html {
 
 .align-children-bottom::before {
   vertical-align: bottom;
-}
+}*/
 
 .metric .drawer {
   z-index: 0;
@@ -101,6 +118,7 @@ html {
   bottom: 100%;
   width: 100%;
   transition: top .3s linear;
+  
 }
 
 .metric .drawer .handle {
@@ -116,11 +134,11 @@ html {
   border-top-left-radius: 10px;
 }
 
-.metric .percentile:first-child { background-color: #7a0177;}
-.metric .percentile:nth-child(2) { background-color: #c51b8a;}
-.metric .percentile:nth-child(3) { background-color: #f768a1;}
-.metric .percentile:nth-child(4) { background-color: #fbb4b9;}
-.metric .percentile:nth-child(5) { background-color: #feebe2;color: slategrey;}
+.metric .bucket:first-child { background-color: #7a0177;}
+.metric .bucket:nth-child(2) { background-color: #c51b8a;}
+.metric .bucket:nth-child(3) { background-color: #f768a1;}
+.metric .bucket:nth-child(4) { background-color: #fbb4b9;}
+.metric .bucket:nth-child(5) { background-color: #feebe2;color: slategrey;}
 
-.metric .percentile.selected { background-color: #a1dab4 !important;}
+.metric .bucket.selected { background-color: #a1dab4 !important;}
 

@@ -4,6 +4,7 @@
     <title></title>
     <script src='./jquery-1.11.1.js'></script>
     <script src='./metric_box.js'></script>
+    <script src='./query_maker.js'></script>
     <link rel='stylesheet' href='metric_box.css'>
     
     <style>
@@ -13,114 +14,61 @@
         background: lightgrey;
         overflow:hidden;
       }
-      .content {
-        height: 100%;
-        overflow-x: scroll;
+
+      .inactive-metrics {
+        position:absolute;
+        top:0;right:0;left:0;
+        bottom:70%;
+        background-color: rgb(14, 116, 175);
+      }
+      
+      .inactive-metrics .metric {
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+        -webkit-transform: scale(.75);
+        transform: scale(.75);
+      }
+      
+      .inactive-metrics .metric .deactivate-metric {
+        visibility: hidden;
+      }
+      
+      .deactivate-metric {
+        background-color: rgba(15, 15, 15, 0.2);
+        color: white;
         display: inline-block;
+        height: 26px;
+        width: 26px;
+        border-radius: 13px;
+        line-height: 26px;
+      }
+      
+      .active-metrics {
+        position:absolute;
+        top:30%;
+        left:0;right:0;bottom:0;
+        overflow-x: scroll;
+        display: flex;
+        background-color: #e2e4e6;
+      }
+      
+      .active-metrics .metric {
+        align-self: flex-end;
       }
     </style>
   </head>
   <body>
+    
     <div class='backdrop'>
-      <div class='content align-children-bottom'>
-        <div class='metric' id='currentRatio'></div>
-        <div class='metric' id='earnings'></div>
-        <div class='metric' id='assets'></div>
-        <div class='metric' id='debt'></div>
+      <div id='mainContent'>
+        <div class='inactive-metrics'></div>
+        <div class='active-metrics align-children-bottom'></div>
       </div>
     </div>
     
     <script>
-      var metric = {
-        'name': 'current ratio',
-        'percentiles': [
-          {
-            'name': '25%',
-            'selected': false
-          },
-          {
-            'name': '50%',
-            'selected': false
-          },
-          {
-            'name': '75%',
-            'selected': false
-          },
-          {
-            'name': '100%',
-            'selected': true
-          }
-        ]
-      };
-      var metric2 = {
-        'name': 'earnings',
-        'percentiles': [
-          {
-            'name': '25%',
-            'selected': false
-          },
-          {
-            'name': '50%',
-            'selected': false
-          },
-          {
-            'name': '75%',
-            'selected': false
-          },
-          {
-            'name': '100%',
-            'selected': false
-          }
-        ]
-      };
-      var metric3 = {
-        'name': 'assets',
-        'percentiles': [
-          {
-            'name': '25%',
-            'selected': false
-          },
-          {
-            'name': '50%',
-            'selected': false
-          },
-          {
-            'name': '75%',
-            'selected': false
-          },
-          {
-            'name': '100%',
-            'selected': false
-          }
-        ]
-      };
-      var metric4 = {
-        'name': 'debt',
-        'percentiles': [
-          {
-            'name': '25%',
-            'selected': false
-          },
-          {
-            'name': '50%',
-            'selected': false
-          },
-          {
-            'name': '75%',
-            'selected': true
-          },
-          {
-            'name': '100%',
-            'selected': true
-          }
-        ]
-      };
-      
       $(function() {
-        $(currentRatio).metricBox(metric);
-        $(earnings).metricBox(metric2);
-        $(assets).metricBox(metric3);
-        $(debt).metricBox(metric4);
+        new app.QueryMaker($(mainContent));
       });
     </script>
   </body>
