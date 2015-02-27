@@ -124,15 +124,12 @@
     
     Report.BASIC_METRICS = [
         "total_current_assets",
+        "total_assets",
         "total_current_liabilities",
-        "current_ratio",
-        'goodwill',
-        'net_income',
-        'fixed_assets',
-        'total_assets',
         'total_equity',
         'financial_leverage_ratio',
-        'liabilities'
+        "current_ratio",
+        "capital_surplus",
     ]
     
     Report.ATTRIBUTES = [
