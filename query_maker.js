@@ -125,7 +125,14 @@
     Report.BASIC_METRICS = [
         "total_current_assets",
         "total_current_liabilities",
-        "current_ratio"
+        "current_ratio",
+        'goodwill',
+        'net_income',
+        'fixed_assets',
+        'total_assets',
+        'total_equity',
+        'financial_leverage_ratio',
+        'liabilities'
     ]
     
     Report.ATTRIBUTES = [
@@ -166,6 +173,28 @@
                     name: '80%',
                     operand: 'gt',
                     value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
+            active: true,
+            tooltip: '',
+        },
+        "financial_leverage_ratio": {
+            name: 'financial leverage ratio',
+            type: '',
+            buckets: [
+                {
+                    name: '<1.5',
+                    operand: 'lt',
+                    value: 1.5,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '>1.5',
+                    operand: 'gt',
+                    value: 1.5,
                     selected: false,
                     tooltip: ''
                 }
@@ -233,374 +262,2233 @@
         },
         "short-term_investments": {
             name: 'short term investments',
+            type: '_percentile',
             buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
             ],
             active: true,
             tooltip: '',
         },
         "capital_surplus": {
             name: 'capital surplus',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "liabilities": {
             name: 'liabilities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_liabilities": {
             name: 'other liabilities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "fixed_assets": {
             name: 'fixed assets',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "income_tax": {
             name: 'income tax',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "common_stocks": {
             name: 'common stocks',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "accounts_payable": {
             name: 'accounts payable',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_income-cont._operations": {
             name: 'net income cont. operations',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_current_assets": {
             name: 'other current assets',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "deferred_liability_charges": {
             name: 'deferred liability charges',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_financing_activities": {
             name: 'other financing activities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "add'l_income/expense_items": {
             name: 'additional income / expense items',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "misc._stocks": {
             name: 'misc. stocks',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_cash_flow-operating": {
             name: 'net operating cash flow',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "minority_interest": {
             name: 'minority interest',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "sale_and_purchase_of_stock": {
             name: 'stock sales / purchases',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "retained_earnings": {
             name: 'retained earnings',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_income": {
             name: 'net income',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "long-term_debt": {
             name: 'long-term debt',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "total_equity": {
             name: 'total equity',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "total_revenue": {
             name: 'total revenue',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "inventory": {
             name: 'inventory',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_investing_activities": {
             name: 'other investing activities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "total_liabilities_&_equity": {
             name: 'total liabilities & equity',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "earnings_before_interest_and_tax": {
             name: 'earnings before interest and tax',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "equity_earnings/loss_unconsolidated_subsidiary": {
             name: 'equity earnings / loss unconsolidated subsidiary',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "non-recurring_items": {
             name: 'non-recurring items',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "accounts_receivable": {
             name: 'accounts receivable',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "intangible_assets": {
             name: 'intangible assets',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_borrowings": {
             name: 'net borrowings',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "interest_expense": {
             name: 'interest expense',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "operating_income": {
             name: 'operating income',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_assets": {
             name: 'other assets',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "short-term_debt_/_current_portion_of_long-term_debt": {
             name: 'short-term debt / current portion of long-term debt',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_income_applicable_to_common_shareholders": {
-            name: '',
-            buckets: [],
+            name: 'net income applicable to common shareholders',
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_equity": {
             name: 'other equity',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_operating_items": {
             name: 'other operating items',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "cash_and_cash_equivalents": {
             name: 'cash and cash equivalents',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_cash_flows-financing": {
             name: 'net cash flows (financing)',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "deferred_asset_charges": {
             name: 'deferred asset charges',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_current_liabilities": {
             name: 'other current liabilities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "total_liabilities": {
             name: 'total liabilities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "cost_of_revenue": {
             name: 'cost of revenue',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "research_and_development": {
             name: 'research and development',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "total_assets": {
             name: 'total assets',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "sales,_general_and_admin": {
             name: 'sales (general and admin)',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "goodwill": {
             name: 'goodwill',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "changes_in_inventories": {
             name: 'changes in inventories',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "effect_of_exchange_rate": {
             name: 'effect of exchange rate',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "other_operating_activities": {
             name: 'other operating activities',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "gross_profit": {
             name: 'gross profit',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_receivables": {
             name: 'net receivables',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_cash_flow": {
             name: 'net cash flow',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "capital_expenditures": {
             name: 'capital expenditures',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_cash_flows-investing": {
             name: 'net cash flows (investing)',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "net_income_adjustments": {
             name: 'net income adjustments',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "depreciation": {
             name: 'depreciation',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "earnings_before_tax": {
             name: 'earnings before tax',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "investments": {
             name: 'investments',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "treasury_stock": {
             name: 'treasury stock',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         },
         "long-term_investments": {
             name: 'long term investments',
-            buckets: [],
+            type: '_percentile',
+            buckets: [
+                {
+                    name: '20%',
+                    operand: 'gt',
+                    value: 20,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '40%',
+                    operand: 'gt',
+                    value: 40,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '60%',
+                    operand: 'gt',
+                    value: 60,
+                    selected: false,
+                    tooltip: ''
+                },
+                {
+                    name: '80%',
+                    operand: 'gt',
+                    value: 80,
+                    selected: false,
+                    tooltip: ''
+                }
+            ],
             active: true,
             tooltip: '',
         }
