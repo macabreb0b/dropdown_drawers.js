@@ -53,6 +53,8 @@
         padding-top: 15px;
         padding-bottom:15px;
         border-bottom: thin solid grey;
+        vertical-align:bottom;
+        min-height: 90%;
       }
       
       .biz-list {
@@ -61,6 +63,10 @@
         background: rgb(235, 227,170);
         border-left: thin solid black;
         overflow: auto;
+      }
+      
+      .biz-list ul {
+        height: 100%;
       }
       
       .deactivate-metric {
@@ -122,6 +128,36 @@
         left: 50%;
         right:0;
       }
+      
+      dl {
+        height: 100%;
+      }
+      
+      dl::after {
+        display: block;
+        clear:both;
+        content:'';
+      }
+      dt, dd {
+        float: left;
+        padding-top:15px;
+      }
+      dt {
+        width: 13%;
+        text-align: right;
+        clear:left;
+      }
+      dd {
+        width: 87%;
+        padding-left: 15px;
+      }
+      
+      .symbol-label {
+        height: 90px;
+      }
+      .symbol h1 {
+        font-size: 75px;
+      }
     </style>
   </head>
   
@@ -139,22 +175,39 @@
           <div class='col-right'>
             
             <div class='biz-list'>
-              <table style="z-index: 1" ng-if="responses2">
-              <tr>
-                <th>name</th>
-                <th>sector</th>
-                <th>industry</th>
-                <th>current_ratio</th>
-                <th>liabilities_percentile</th>
-              </tr>
-              <tr ng-repeat="response in responses2">
-                <td>{{response._source.name}} ({{response._source.symbol}})</td>
-                <td>{{response._source.sector}}</td>
-                <td>{{response._source.industry}}</td>
-                <td>{{response._source.current_ratio}}</td>
-                <td>{{response._source.liabilities_percentile}}</td>
-              </tr>
-            </table>
+              <ul style="z-index: 1" ng-if="responses2">
+              <li class='company' ng-repeat="response in responses2">
+                <dl>
+                  <dt class='align-children-bottom symbol-label'>symbol:</dt>
+                  <dd class='symbol'><h1>{{response._source.symbol}}</h1></dd>
+                  <dt>name:</dt>
+                  <dd><h4>{{response._source.name}}</h4></dd>
+                  <dt>sector: </dt>
+                  <dd><h4>{{response._source.sector}}</h4></dd>
+                  <dt>industry: </dt>
+                    <dd><h4>{{response._source.industry}}</h4></dd>
+                  <dt>current ratio: </dt>
+                    <dd><h4>{{response._source.current_ratio}}</h4></dd>
+                  <!-- <dt>liabilities (percentile): </dt>
+                    <dd><h4>{{response._source.liabilities_percentile}}</h4></dd> -->
+                    
+                  <dt>goodwill: </dt>
+                  <dd><h4>{{response._source.goodwill_percentile}}</h4></dd>
+                  <dt>gross profit: </dt>
+                  <dd><h4>{{response._source.gross_profit_percentile}}</h4></dd>
+                  <dt>financial leverage ratio: </dt>
+                  <dd><h4>{{response._source.financial_leverage_ratio}}</h4></dd>
+                  <dt>total equity: </dt>
+                  <dd><h4>{{response._source.total_equity_percentile}}</h4></dd>
+                  <dt>capital surplus (percentile): </dt>
+                  <dd><h4>{{response._source.capital_surplus_percentile}}</h4></dd>
+                  <dt>total current assets (percentile): </dt>
+                  <dd><h4>{{response._source.total_current_assets_percentile}}</h4></dd>
+                  <dt>total current liabilities (percentile): </dt>
+                  <dd><h4>{{response._source.total_current_liabilities_percentile}}</h4></dd>
+                </dl>
+              </li>
+            </ul>
             </div>
             
           </div>

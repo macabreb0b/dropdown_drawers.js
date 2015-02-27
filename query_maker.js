@@ -174,7 +174,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "financial_leverage_ratio": {
@@ -196,7 +196,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "total_current_liabilities": {
@@ -232,7 +232,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "current_ratio": {
@@ -254,7 +254,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "short-term_investments": {
@@ -290,7 +290,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "capital_surplus": {
@@ -326,7 +326,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "liabilities": {
@@ -362,7 +362,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "other_liabilities": {
@@ -398,7 +398,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "fixed_assets": {
@@ -434,7 +434,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "income_tax": {
@@ -470,7 +470,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "common_stocks": {
@@ -506,7 +506,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "accounts_payable": {
@@ -542,7 +542,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "net_income-cont._operations": {
@@ -578,7 +578,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "other_current_assets": {
@@ -614,7 +614,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "deferred_liability_charges": {
@@ -650,7 +650,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "other_financing_activities": {
@@ -686,7 +686,7 @@
                     tooltip: ''
                 }
             ],
-            active: true,
+            active: false,
             tooltip: '',
         },
         "add'l_income/expense_items": {
