@@ -105,27 +105,167 @@
       }
     </style>
   </head>
-  <body>
-    
-    <div class='backdrop'>
-      <div id='mainContent'>
-        <div class='col-left'>
-          <div class='inactive-metrics'></div>
-          <div class='active-metrics align-children-bottom'></div>
-          <div class='make-query'>?</div>
-        </div>
-        
-        <div class='col-right'>
+  <body ng-app="myISquaredApp">
+    <div ng-controller="myISquaredController" class="container">
+      <div class='backdrop'>
+        <div id='mainContent'>
+          <div class='col-left'>
+            <div class='inactive-metrics'></div>
+            <div class='active-metrics align-children-bottom'></div>
+            <!-- <div class='make-query'>?</div> -->
+            <div class='make-query' ng-click="makeQuery()">?</div>
+          </div>
           
-          <div class='biz-list'></div>
+          <div class='col-right'>
+            
+            <div class='biz-list'>
+              <table style="z-index: 1" ng-if="responses2">
+              <tr>
+                <th>name</th>
+                <th>sector</th>
+                <th>industry</th>
+                <th>current_ratio</th>
+                <th>liabilities_percentile</th>
+              </tr>
+              <tr ng-repeat="response in responses2">
+                <td>{{response._source.name}} ({{response._source.symbol}})</td>
+                <td>{{response._source.sector}}</td>
+                <td>{{response._source.industry}}</td>
+                <td>{{response._source.current_ratio}}</td>
+                <td>{{response._source.liabilities_percentile}}</td>
+              </tr>
+            </table>
+            </div>
+            
+          </div>
         </div>
       </div>
+      
+      <script>
+        $(function() {
+          q = new app.QueryMaker($(mainContent));
+        });
+      </script>
+
+    <!-- include bower components in proper order -->
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/elasticsearch/elasticsearch.angular.js"></script>
+
+      <!-- This should be moved out into its own file. Oh well. #hackathon-->
+      <script>
+
+        var q = new app.QueryMaker($('body'));
+        // App module
+        //
+        // The app module will contain all of the components the app needs (directives,
+        // controllers, services, etc.). Since it will be using the components within
+        // the elasticsearch module, define it a dependency.
+        var ExampleApp = angular.module('myISquaredApp', ['elasticsearch']);
+
+        // Service
+        //
+        // esFactory() creates a configured client instance. Turn that instance
+        // into a service so that it can be required by other parts of the application
+        ExampleApp.service('client', function (esFactory) {
+          return esFactory({
+            host: 'http://www.myisquared.com:9200',
+            apiVersion: '1.2',
+            log: 'trace'
+          });
+        });
+
+        // Controller
+        //
+        // It requires the "client" service, and fetches information about the server,
+        // it adds either an error or info about the server to $scope.
+        //
+        // It also requires the esFactory so that it can check for a specific type of
+        // error which might come back from the client
+        ExampleApp.controller('myISquaredController', function ($scope, client, esFactory) {
+          // Example taken from http://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/api-reference.html , added $scope stuff.
+          client.count(function (error, response, status) {
+            // check for and handle error
+            $scope.clusterCount = response.count;
+          });
+
+          // SAMPLE DETAILED GET FOR A PARTICULAR STOCK.
+          client.get({
+            index: 'stockpicks',
+            type: 'stock',
+            id: 'HCSG@2014-12-31'
+          }, function (error, response) {
+            $scope.clusterResponse = response._source;
+          });
+
+          // DOES A SEARCH FOR ALL RESULTS.
+          client.search({
+            index: 'stockpicks', 
+            
+            // trying to do fancy stuff here, fix if broken:
+            body: {
+              // query: buildQueryFromParams()
+              query: {
+                range: {
+                  current_ratio: {
+                    gt: 1.0,
+                  }
+                }
+              }
+            }
+          }, function (error, response) {
+            console.log("Response is: ");
+            console.log(response);
+            $scope.responses = response.hits.hits;
+
+            console.log("Responses are: ");
+            console.log(response.hits.hits);
+          })
+
+          // client.ping({
+          //   requestTimeout: 1000,
+
+          //   // parameters appended to the query string
+
+          // })
+
+          $scope.makeQuery = function() {
+
+            console.log("q is: ");
+            console.log(q);
+            var metrics = q.buildParamsFromActiveMetrics();
+            console.log("Metrics are: ");
+            console.log(metrics);
+
+            console.log("Clicked to make a request!");
+            var ExampleApp = angular.module('myISquaredApp');
+            console.log("Got the example app!");
+
+            console.log("Did stuff with the controller!");
+            client.search({
+              index: 'stockpicks', 
+              
+              // trying to do fancy stuff here, fix if broken:
+              body: {
+                // query: q.buildQueryFromParams()
+                query: {
+                  range: {
+                    current_ratio: {
+                      gt: 1.0,
+                    }
+                  }
+                }
+              }
+            }, function (error, response) {
+              console.log("Response is: ");
+              console.log(response);
+              $scope.responses2 = response.hits.hits;
+
+              console.log("Responses are: ");
+              console.log(response.hits.hits);
+            });
+          }
+        });
+      </script>
     </div>
-    
-    <script>
-      $(function() {
-        q = new app.QueryMaker($(mainContent));
-      });
-    </script>
   </body>
 </html>
