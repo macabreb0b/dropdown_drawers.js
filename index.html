@@ -8,6 +8,13 @@
     <link rel='stylesheet' href='metric_box.css'>
     
     <style>
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+    
       .backdrop {
         position:absolute;
         left:0;right:0;bottom:0;top:0;
@@ -41,12 +48,16 @@
         display: none;
       }
       
+      li.company {
+        padding-left: 5px;
+        padding-top: 15px;
+        padding-bottom:15px;
+        border-bottom: thin solid grey;
+      }
+      
       .biz-list {
-        position:fixed;
-        top:0;
-        bottom:0;
-        right: 0;
-        left:0;
+        position:absolute;
+        top:0;bottom:0;right:0;left:0;
         background: rgb(235, 227,170);
         border-left: thin solid black;
         overflow: auto;
@@ -76,6 +87,8 @@
         right: 0;
         z-index: 3;
         background:purple;
+        text-align:right;
+        padding-right:20px;
       }
       
       .active-metrics {
@@ -84,27 +97,34 @@
         left:0;right:0;
         bottom:50px;
         overflow-x: scroll;
-        display: flex;
+        white-space:nowrap;
         background-color: rgb(255,255,255);
         z-index: 1;
+        padding-bottom:30px;
       }
+      
       .active-metrics .metric {
-        align-self: flex-end;
+        white-space: normal;
+        margin-bottom:10px;
       }
+      
       .col-left, .col-right {
         position:absolute;
         top:0;bottom:0;
       }
+      
       .col-left {
         left: 0;
         right: 50%;
       }
+      
       .col-right {
         left: 50%;
         right:0;
       }
     </style>
   </head>
+  
   <body ng-app="myISquaredApp">
     <div ng-controller="myISquaredController" class="container">
       <div class='backdrop'>
@@ -113,7 +133,7 @@
             <div class='inactive-metrics'></div>
             <div class='active-metrics align-children-bottom'></div>
             <!-- <div class='make-query'>?</div> -->
-            <div class='make-query' ng-click="makeQuery()">?</div>
+            <div class='make-query' ng-click="makeQuery()">go &#65515;</div>
           </div>
           
           <div class='col-right'>

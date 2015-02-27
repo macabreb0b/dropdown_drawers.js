@@ -91,7 +91,7 @@ html {
   border-right: thin solid slategrey;
 }
 
-/*.align-children-middle > *,
+.align-children-middle > *,
 .align-children-bottom > * {
   display: inline-block;
 }
@@ -109,7 +109,8 @@ html {
 
 .align-children-bottom::before {
   vertical-align: bottom;
-}*/
+}
+
 
 .metric .drawer {
   z-index: 0;

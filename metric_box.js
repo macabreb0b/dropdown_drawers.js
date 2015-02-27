@@ -139,14 +139,6 @@ $.MetricBox.prototype.selectPercentile = function(ord, $bucket) {
     })
     this.metric.buckets[ord].selected = true;
 };
-//
-// $.MetricBox.prototype.deselectPercentile = function(ord, $bucket) {
-//     while($bucket[0]) {
-//         $bucket.removeClass('selected');
-//         $bucket = $bucket.prev();
-//     }
-//     this.metric.buckets[ord] = false;
-// };
 
 $.MetricBox.prototype.buildPercentile = function(bucket, idx) {
     var $bucket = $('<div class="bucket align-children-middle">');
