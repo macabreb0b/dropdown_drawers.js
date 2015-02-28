@@ -201,8 +201,12 @@
                   <dd><h4>{{response._source.total_equity_percentile}}</h4></dd>
                   <dt>capital surplus (percentile): </dt>
                   <dd><h4>{{response._source.capital_surplus_percentile}}</h4></dd>
+                  <dt>total current assets: </dt>
+                  <dd><h4>{{response._source.total_current_assets}}</h4></dd>
                   <dt>total current assets (percentile): </dt>
                   <dd><h4>{{response._source.total_current_assets_percentile}}</h4></dd>
+                  <dt>total current liabilities: </dt>
+                  <dd><h4>{{response._source.total_current_liabilities}}</h4></dd>
                   <dt>total current liabilities (percentile): </dt>
                   <dd><h4>{{response._source.total_current_liabilities_percentile}}</h4></dd>
                 </dl>
@@ -213,12 +217,7 @@
           </div>
         </div>
       </div>
-      
-      <script>
-        $(function() {
-          q = new app.QueryMaker($(mainContent));
-        });
-      </script>
+
 
     <!-- include bower components in proper order -->
       <script src="bower_components/angular/angular.js"></script>
@@ -276,14 +275,14 @@
             
             // trying to do fancy stuff here, fix if broken:
             body: {
-              // query: buildQueryFromParams()
-              query: {
-                range: {
-                  current_ratio: {
-                    gt: 1.0,
-                  }
-                }
-              }
+              query: buildQueryFromParams()
+              // query: {
+//                 range: {
+//                   current_ratio: {
+//                     gt: 1.0,
+//                   }
+//                 }
+//               }
             }
           }, function (error, response) {
             console.log("Response is: ");
@@ -329,6 +328,7 @@
                 }
               }
             }, function (error, response) {
+              
               console.log("Response is: ");
               console.log(response);
               $scope.responses2 = response.hits.hits;

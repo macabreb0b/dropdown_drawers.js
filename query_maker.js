@@ -29,6 +29,7 @@
     QueryMaker.prototype.getDefaultMetrics = function() {
         Report.BASIC_METRICS.forEach(function(metric) {
             this.metrics[metric] = Report.METRICS[metric];
+            console.log(metric);
         }.bind(this));
     };
     
@@ -123,13 +124,15 @@
     };
     
     Report.BASIC_METRICS = [
-        "total_current_assets",
+        "capital_surplus",
+        "current_ratio",
+        'financial_leverage_ratio',
+        'goodwill',
+        'gross_profit',
         "total_assets",
+        "total_current_assets",
         "total_current_liabilities",
         'total_equity',
-        'financial_leverage_ratio',
-        "current_ratio",
-        "capital_surplus",
     ]
     
     Report.ATTRIBUTES = [
