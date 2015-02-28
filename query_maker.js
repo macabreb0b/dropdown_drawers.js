@@ -54,7 +54,7 @@
     };
     
     QueryMaker.prototype.buildParamsFromActiveMetrics = function() {
-        var range = {};
+        var activeParams = [];
         for(var metricKey in this.metrics) {
             var metric = this.metrics[metricKey];
             if (metric.active) {
@@ -67,13 +67,16 @@
                 });
 
                 if (selectedBucket) {
-                    var r = range[metricKey] = {};
-                    r[selectedBucket.operand] = selectedBucket.value;                  
+                    var param = {range: {}};
+                    param.range[metricKey] = range = {};
+                    range[selectedBucket.operand] = selectedBucket.value;
+                
+                    activeParams.push(param);                    
                 }
             }
         }
         
-        return range;
+        return activeParams;
     };
     
     QueryMaker.prototype.makeRequest = function() {

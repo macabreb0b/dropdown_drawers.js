@@ -313,7 +313,6 @@
             console.log("Got the example app!");
 
             console.log("Did stuff with the controller!");
-            debugger
             client.search({
               index: 'stockpicks', 
               
@@ -321,7 +320,11 @@
               body: {
                 // query: q.buildQueryFromParams()
                 query: {
-                  range: metrics
+                    bool: {
+                        must: metrics,
+                        must_not: [],
+                        should: []
+                    }
                 }
               }
             }, function (error, response) {
