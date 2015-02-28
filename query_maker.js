@@ -54,11 +54,11 @@
     };
     
     QueryMaker.prototype.buildParamsFromActiveMetrics = function() {
-        var activeParams = [];
+        var range = {};
         for(var metricKey in this.metrics) {
             var metric = this.metrics[metricKey];
             if (metric.active) {
-                metricKey = 'stock.' + metricKey + metric.type;
+                metricKey = metricKey + metric.type;
                 var selectedBucket = null;
                 metric.buckets.forEach(function(bucket) {
                     if (bucket.selected) {
@@ -67,16 +67,13 @@
                 });
 
                 if (selectedBucket) {
-                    var param = {range: {}};
-                    param.range[metricKey] = range = {};
-                    range[selectedBucket.operand] = selectedBucket.value;
-                
-                    activeParams.push(param);                    
+                    var r = range[metricKey] = {};
+                    r[selectedBucket.operand] = selectedBucket.value;                  
                 }
             }
         }
         
-        return activeParams;
+        return range;
     };
     
     QueryMaker.prototype.makeRequest = function() {
