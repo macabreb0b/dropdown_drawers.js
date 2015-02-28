@@ -275,14 +275,14 @@
             
             // trying to do fancy stuff here, fix if broken:
             body: {
-              query: buildQueryFromParams()
-              // query: {
-//                 range: {
-//                   current_ratio: {
-//                     gt: 1.0,
-//                   }
-//                 }
-//               }
+              // query: q.buildQueryFromParams()
+              query: {
+                range: {
+                  current_ratio: {
+                    gt: 1.0,
+                  }
+                }
+              }
             }
           }, function (error, response) {
             console.log("Response is: ");
